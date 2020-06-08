@@ -22,6 +22,9 @@ module.exports = {
     'react',
   ],
   rules: {
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "no-console": 0,
+    "import/prefer-default-export": 0,
+    "react/no-unescaped-entities": 0
   },
 };
