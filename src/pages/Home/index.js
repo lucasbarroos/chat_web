@@ -15,6 +15,8 @@ import {
   OwnMessage,
   OwnMessageContent,
   OwnMessageTime,
+  NewUserButton,
+  NewUserText,
 } from './styles';
 
 const SOCKET_URL = 'http://localhost:3333';
@@ -27,13 +29,14 @@ const iconStyle = {
 };
 
 const Home = () => {
-  const [user] = useState('Lucas Barros');
+  const [user, setUser] = useState(null);
+  const [newName, setNewName] = useState('');
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
 
-  const newMessage = (message) => {
+  const newMessage = (newMsg) => {
     const actualMessages = messages;
-    setMessages([...actualMessages, message]);
+    setMessages([...actualMessages, newMsg]);
   };
 
   socket.on('chat message', (data) => {
@@ -42,13 +45,21 @@ const Home = () => {
 
   const handleMessage = () => {
     if (message.length !== 0) {
-      socket.emit('chat message', {
+      console.log(user);
+      const msg = {
         author: user,
         message,
         time: '12:00 am',
-      });
+      };
+
+      console.log(msg);
+      socket.emit('chat message', msg);
       setMessage('');
     }
+  };
+
+  const handleName = () => {
+    if (newName !== '') setUser(newName);
   };
 
   return (
@@ -73,14 +84,26 @@ const Home = () => {
             )))
           }
         </MessageContainer>
-        <TextInput
-          placeholder="Type a message"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-        />
-        <SendButton>
-          <NavigationIcon onClick={handleMessage} style={iconStyle} />
-        </SendButton>
+        {user ? (
+          <>
+            <TextInput
+              placeholder="Type a message"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+            />
+            <SendButton onClick={handleMessage}>
+              <NavigationIcon style={iconStyle} />
+            </SendButton>
+          </>
+        )
+          : (
+            <>
+              <NewUserText value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Choose a name" />
+              <NewUserButton onClick={handleName}>
+                Enter
+              </NewUserButton>
+            </>
+          )}
       </ChatView>
     </Container>
   );

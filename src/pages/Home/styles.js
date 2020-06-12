@@ -123,3 +123,34 @@ export const OwnMessageTime = styled.div`
     right: 20px;
     color: white;
 `;
+
+
+export const NewUserText = styled.input`
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    right: 180px;
+    bottom: 20px;
+    background: #F2F4FF;
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    padding: 0px 10px 0px 10px;
+`;
+
+export const NewUserButton = styled.button`
+    position: absolute;
+    width: 150px;
+    border-radius: 5px;
+    height: 50px;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 0px 1px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4864E6;
+    font-size: 20px;
+`;
