@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Animated } from 'react-animated-css';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import io from 'socket.io-client';
 import {
@@ -45,14 +46,12 @@ const Home = () => {
 
   const handleMessage = () => {
     if (message.length !== 0) {
-      console.log(user);
       const msg = {
         author: user,
         message,
         time: '12:00 am',
       };
 
-      console.log(msg);
       socket.emit('chat message', msg);
       setMessage('');
     }
