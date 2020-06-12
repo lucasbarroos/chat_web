@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Animated } from 'react-animated-css';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import io from 'socket.io-client';
 import {
